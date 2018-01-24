@@ -1,5 +1,7 @@
+publish.sh
 build.sh
 run.sh
 ssh.sh
 cleanup.sh
 factomd
+factomd.conf

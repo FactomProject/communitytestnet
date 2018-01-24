@@ -3,13 +3,14 @@ FROM emyrk/ubuntu-golang:1.9.2
 
 # Get git, ssh, and other tools
 RUN apt-get update \
-    && apt-get -y install openssh-server curl git vim iputils-ping \
+    && apt-get -y install openssh-server curl git vim iputils-ping net-tools ufw\
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Setup ssh
 RUN mkdir /var/run/sshd
-RUN echo 'root:screencast' | chpasswd
-RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+# Password for root if we need debugging without ssh-key access
+# RUN echo 'root:screencast' | chpasswd
+# RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
