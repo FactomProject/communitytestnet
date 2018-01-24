@@ -1,12 +1,10 @@
 # Community Test Net
 
-The docker image can be built from the Dockerfile, however it is advised to pull it from docker hub.
+The docker image can be built from the Dockerfile, however it is advised to pull it from docker hub. Docker was chosen as a lightweight option to execute factomd within an enviroment the Factom developers can have access to, without having access to the host machine.
 
 ## Docker image
 
 The docker image is constructed to allw for factom developers to have ssh access to the docker container for remote debugging and analyzing. This does not grant ssh access to the host machine, only the docker container.
-
-# Installation and Run instructions
 
 ## Run with Docker
 
