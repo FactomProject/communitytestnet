@@ -49,7 +49,6 @@ ADD ./bin/* /root/
 RUN mkdir -p /root/.factom/m2
 # COPY $GOPATH/src/github.com/FactomProject/factomd/factomd.conf /root/.factom/m2/factomd.conf
 
-
 ## Expose and start
 EXPOSE 22 8108 8109 8110 8088 8090 9876
 CMD ["/usr/sbin/sshd", "-D"]

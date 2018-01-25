@@ -17,8 +17,26 @@ To create the environment install the following components first:
 
 ### Creating the environment
 
+First create the volume for factomd
 ```
-docker-compose up
+docker volume create factomd_volume
+```
+
+Place the config you have inside
+```
+docker run --rm -v ${PWD}/factomd.conf:/source -v factomd_volume:/destination busybox /bin/cp /source /destination/factomd.conf
+```
+
+Pull the factomd image
+
+```
+docker pull emyrk/factomd_testnet_community:v1
+```
+
+Launch factomd & monitoring
+
+```
+docker-compose up -d
 ```
 
 This command:
@@ -26,14 +44,19 @@ This command:
  - starts all the containers
  - starts printing all *stdout* logs from the containers to the foreground.
 
-If you prefer to run this in the background, use the `-d` option:
+If you prefer to run this in the foreground, do not use the `-d` option:
 
 ```
-docker-compose up -d
+docker-compose up
 ```
 
 After *docker-compose* finishes the startup, be sure to check the output of
 `docker ps` command to make sure all the services are running.
+
+Now you can start factomd
+```
+docker exec factomd_node bash /root/start.sh
+```
 
 ### Starting/stopping the environment
 

@@ -1,0 +1,1 @@
+pkill -2 factomd
