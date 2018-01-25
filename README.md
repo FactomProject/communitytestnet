@@ -17,16 +17,6 @@ To create the environment install the following components first:
 
 ### Creating the environment
 
-First create the volume for factomd
-```
-docker volume create factomd_volume
-```
-
-Place the config you have inside
-```
-docker run --rm -v ${PWD}/factomd.conf:/source -v factomd_volume:/destination busybox /bin/cp /source /destination/factomd.conf
-```
-
 Pull the factomd image
 
 ```
@@ -37,6 +27,11 @@ Launch factomd & monitoring
 
 ```
 docker-compose up -d
+```
+
+Place the config you have inside
+```
+docker run --rm -v ${PWD}/factomd.conf:/source -v communitytestnet_factomd_volume:/destination busybox /bin/cp /source /destination/factomd.conf
 ```
 
 This command:

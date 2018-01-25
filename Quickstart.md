@@ -11,14 +11,13 @@ To create the environment install the following components first:
 The quickstart commands
 
 ```
-# Setup volume
-cp factomd.conf.EXAMPLE factomd.conf
-docker volume create factomd_volume
-docker run --rm -v ${PWD}/factomd.conf:/source -v factomd_volume:/destination busybox /bin/cp /source /destination/factomd.conf
-
 # Start docker containers
 docker pull emyrk/factomd_testnet_community:v1
 docker-compose up -d
+
+# Setup volume
+cp factomd.conf.EXAMPLE factomd.conf
+docker run --rm -v ${PWD}/factomd.conf:/source -v communitytestnet_factomd_volume:/destination busybox /bin/cp /source /destination/factomd.conf
 
 # Start factomd
 docker exec factomd_node bash /root/start.sh
