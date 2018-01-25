@@ -1,5 +1,7 @@
 # Community Test Net
 
+[Quickstart guide](Quickstart.md)
+
 Spinning up a factom node on the community testnet as well as monitoring tools. The docker image for factomd will enable Factom developers to have ssh access to docker container.
 
 ## Basic usage
