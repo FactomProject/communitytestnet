@@ -26,9 +26,10 @@ ControlPanelPort                      = 8090
 ;TestNetworkPort      = 8109
 ;TestSeedURL          = "https://raw.githubusercontent.com/FactomProject/factomproject.github.io/master/seed/testseed.txt"
 ;TestSpecialPeers     = ""
-;LocalNetworkPort     = 8110
-;LocalSeedURL         = "https://raw.githubusercontent.com/FactomProject/factomproject.github.io/master/seed/localseed.txt"
-;LocalSpecialPeers    = ""
+LocalNetworkPort     = 8110
+; Using the seeds url for the community testnet
+LocalSeedURL         = "https://raw.githubusercontent.com/FactomProject/communitytestnet/master/seeds/testnetseeds.txt"
+LocalSpecialPeers    = ""
 ; --------------- NodeMode: FULL | SERVER ----------------
 ;NodeMode                                = FULL
 ;IdentityChainID						 = 38bab1455b7bd7e5efd15c53c777c79d0c988e9210f1da49a99d95b3a6417be9

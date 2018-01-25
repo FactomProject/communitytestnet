@@ -3,7 +3,7 @@ FROM emyrk/ubuntu-golang:1.9.2
 
 # Get git, ssh, and other tools
 RUN apt-get update \
-    && apt-get -y install openssh-server curl git vim iputils-ping net-tools ufw\
+    && apt-get -y install openssh-server curl git vim iputils-ping net-tools netcat ufw\
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Setup ssh
@@ -18,32 +18,32 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
-
 # Setup ssh keys
 RUN mkdir /root/.ssh
 #	Can add from URL?
 ADD ./authorized_keys /root/.ssh
 
-RUN mkdir -p /root/go/src/github.com/FactomProject/factom
-RUN mkdir -p /root/go/bin
-ENV GOPATH=/root/go
-
 # Install Factomd
-# Get glide
-RUN go get github.com/Masterminds/glide
-COPY factomd /root/go/src/github.com/FactomProject/factomd
-# RUN go get github.com/FactomProject/factomd
+	# RUN mkdir -p /root/go/bin
+	# ENV GOPATH=/root/go
+	# # Get glide
+	# RUN go get github.com/Masterminds/glide
+	# COPY factomd /root/go/src/github.com/FactomProject/factomd
 
 
-# Where factomd sources will live
-WORKDIR $GOPATH/src/github.com/FactomProject/factomd
+	# # Where factomd sources will live
+	# WORKDIR $GOPATH/src/github.com/FactomProject/factomd
 
-# Install dependencies
-RUN /root/go/bin/glide install -v
+	# # Install dependencies
+	# RUN /root/go/bin/glide install -v
 
-# Build and install factomd
-ARG GOOS=linux
-RUN go install -ldflags "-X github.com/FactomProject/factomd/engine.Build=`git rev-parse HEAD` -X github.com/FactomProject/factomd/engine.FactomdVersion=`cat VERSION`"
+	# # Build and install factomd
+	# ARG GOOS=linux
+	# RUN go install -ldflags "-X github.com/FactomProject/factomd/engine.Build=`git rev-parse HEAD` -X github.com/FactomProject/factomd/engine.FactomdVersion=`cat VERSION`"
+
+ADD ./bin/* /root/
+
+# Inserting binaries instead
 
 # Setup the cache directory
 RUN mkdir -p /root/.factom/m2
