@@ -60,6 +60,15 @@ This command:
  - removes all service containers
  - removes all created networks
 
+### Updating the enviroment
+
+Get latest updates, then update docker containers
+
+```
+git pull
+docker-compose build
+```
+
 ## Using services
 
 Once the environment is properly built and started you can start using it for
