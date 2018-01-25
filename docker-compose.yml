@@ -21,9 +21,6 @@ services:
             - "8090:8090"
         volumes:
             - factomd_volume:/root/.factom/m2/
-            #- factomd_volume:/root/.factom/m2
-            # - ./factom/factomd.conf:/root/.factom/m2/factomd.conf:ro
-        # command: -sim_stdin=false -customnet=net -network=CUSTOM -startdelay=10
         networks:
             factomd:
                 ipv4_address: 10.7.0.1

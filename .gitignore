@@ -1,12 +1,15 @@
 factom/publish.sh
 factom/build.sh
 factom/run.sh
+factom/loadbin.sh
 factom/ssh.sh
 factom/cleanup.sh
 factom/factomd.conf
 factom/bin/factomd
 factom/bin/factom-cli
 factom/bin/factom-walletd
+factom/bin/serveridentity
+factom/bin/signwithed25519
 
 
 

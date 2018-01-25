@@ -52,7 +52,7 @@ After *docker-compose* finishes the startup, be sure to check the output of
 
 Now you can start factomd
 ```
-docker exec factomd_node bash /root/start.sh
+docker exec factomd_node bash /root/bin/start.sh
 ```
 
 ### Starting/stopping the environment

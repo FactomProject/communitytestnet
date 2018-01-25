@@ -18,6 +18,12 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
+# This is helpful for easy command usage
+#	For when we ssh in
+RUN echo "export PATH=${PATH}:/root/bin" >> /etc/profile
+#	For docker exec
+ENV PATH=${PATH}:/root/bin
+
 # Setup ssh keys
 RUN mkdir /root/.ssh
 #	Can add from URL?
@@ -41,13 +47,15 @@ ADD ./authorized_keys /root/.ssh
 	# ARG GOOS=linux
 	# RUN go install -ldflags "-X github.com/FactomProject/factomd/engine.Build=`git rev-parse HEAD` -X github.com/FactomProject/factomd/engine.FactomdVersion=`cat VERSION`"
 
-ADD ./bin/* /root/
+ADD ./bin/* /root/bin/
 
 # Inserting binaries instead
 
 # Setup the cache directory
 RUN mkdir -p /root/.factom/m2
 # COPY $GOPATH/src/github.com/FactomProject/factomd/factomd.conf /root/.factom/m2/factomd.conf
+
+WORKDIR /root/
 
 ## Expose and start
 EXPOSE 22 8108 8109 8110 8088 8090 9876
