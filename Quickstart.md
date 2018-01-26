@@ -58,7 +58,46 @@ docker-compose down
 
 # Authority Nodes
 
-Authority nodes need to create an identity in order to be eligble to run a Federated/Audit server.
+Authority nodes need to create an identity in order to be eligble to run a Federated/Audit server. Authority nodes also need to open certain ports to the outside world.
+
+## Ports
+
+Authority nodes need to have 2 ports exposed to the public:
+
+- 8110 : Peer discovery port
+- 8220 : Allow ssh access for Factom Developers
+
+Firewall rules specific to the docker container may be implmented to control network topology for security or test reasons.
+
+### Testing open ports
+
+To test your ports are exposed, first ensure factomd is running, then with the netcat tool try the following:
+
+```
+nc PUBLIC_IP 8110
+```
+
+You should see the following:
+
+```
+,��Parcel��Header��Payload
+����
+NetworkVersionTypeLength
+...
+```
+
+This means your peer discovery port is open. You can also try to ssh into the machine (it will reject you)
+
+```
+ssh root@PUBLIC_IP -p 8220
+```
+
+### Additional Ports
+
+Additional ports that your host can use and expose in whatever way you wish.
+
+- 8090 : Control Panel
+- 3001 : Grafana
 
 ## Creating an Identity
 
