@@ -1,0 +1,3959 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "4.6.3"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Factomd instrumentation related to state",
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 1,
+  "hideControls": false,
+  "id": null,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": false,
+      "title": "Factomd",
+      "type": "dashboards",
+      "url": ""
+    }
+  ],
+  "refresh": "30s",
+  "rows": [
+    {
+      "collapse": false,
+      "height": 77,
+      "panels": [
+        {
+          "content": "# Factomd Instrumentation\nBe sure to set the time window in the top right to the time window you are interested in. \n",
+          "id": 2,
+          "links": [],
+          "mode": "markdown",
+          "span": 12,
+          "title": "",
+          "type": "text"
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Title",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": true,
+      "height": 194,
+      "panels": [
+        {
+          "content": "# Memory Analytics\n\nMemstats --> Go Tool to analyze memory usuage\n\nGC --> Garbage Collector",
+          "editable": true,
+          "error": false,
+          "height": "100px",
+          "id": 16,
+          "links": [],
+          "mode": "markdown",
+          "span": 12,
+          "title": "Memory",
+          "type": "text"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 15,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "MemStats Inuse Objects",
+              "yaxis": 2
+            }
+          ],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "go_memstats_heap_inuse_bytes{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "Inuse Heap Bytes",
+              "refId": "A",
+              "step": 2
+            },
+            {
+              "expr": "go_memstats_heap_objects{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "Inuse Heap Objects",
+              "refId": "B",
+              "step": 2
+            },
+            {
+              "expr": "go_memstats_frees_total{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "MemStats Freed",
+              "refId": "C",
+              "step": 20
+            },
+            {
+              "expr": "process_resident_memory_bytes{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Resident Memory",
+              "refId": "D",
+              "step": 2
+            },
+            {
+              "expr": "process_virtual_memory_bytes{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Virtual Memory",
+              "refId": "E",
+              "step": 2
+            },
+            {
+              "expr": "",
+              "intervalFactor": 2,
+              "refId": "F"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Memory",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "bytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 17,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "go_memstats_heap_alloc_bytes{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Heap Allocated and Inuse",
+              "refId": "D",
+              "step": 2
+            },
+            {
+              "expr": "go_memstats_heap_inuse_bytes{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Heap Inuse",
+              "refId": "E",
+              "step": 2
+            },
+            {
+              "expr": "go_memstats_heap_idle_bytes{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Heap Idle Bytes",
+              "refId": "G",
+              "step": 2
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Heap Stats",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "decbytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 23,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "go_memstats_heap_sys_bytes{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "System Reported Memory",
+              "refId": "A",
+              "step": 2
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "System Reported Memory",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "bytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 18,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "go_memstats_gc_sys_bytes{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "GC Heap Bytes",
+              "refId": "A",
+              "step": 2
+            },
+            {
+              "expr": "go_memstats_buck_hash_sys_bytes{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Profiling Bucket Bytes",
+              "refId": "B",
+              "step": 2
+            },
+            {
+              "expr": "factomd_database_leveldb_cacheblock{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Level DB Caching",
+              "metric": "factomd_database_leveldb_cacheblock",
+              "refId": "C",
+              "step": 2
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Bytes used by non-factomd",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "bytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 19,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "go_memstats_mallocs_total{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Total Mallocs",
+              "refId": "A",
+              "step": 2
+            },
+            {
+              "expr": "go_memstats_frees_total{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Total Frees",
+              "refId": "B",
+              "step": 2
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Malloc/Free Totals",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "description": "Database",
+          "fill": 1,
+          "id": 28,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "Gets/s",
+              "yaxis": 2
+            },
+            {
+              "alias": "Puts/s",
+              "yaxis": 2
+            }
+          ],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_database_leveldb_cacheblock{job=\"factom-factomd-$Node\"}",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "metric": "factomd_database_leveldb_cacheblock",
+              "refId": "A",
+              "step": 2
+            },
+            {
+              "expr": "factomd_database_leveldb_gets{job=\"factom-factomd-$Node\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "LevelDB Gets",
+              "metric": "factomd_database_leveldb_gets",
+              "refId": "B",
+              "step": 2
+            },
+            {
+              "expr": "factomd_database_leveldb_puts{job=\"factom-factomd-$Node\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "LevelDB Puts",
+              "metric": "factomd_database_leveldb_puts",
+              "refId": "C",
+              "step": 2
+            },
+            {
+              "expr": "rate(factomd_database_leveldb_gets{job=\"factom-factomd-$Node\"}[1m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "Gets/s",
+              "refId": "D",
+              "step": 2
+            },
+            {
+              "expr": "rate(factomd_database_leveldb_puts{job=\"factom-factomd-$Node\"}[1m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "Puts/s",
+              "refId": "E",
+              "step": 2
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "LevelDB",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 46,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "Gets/s",
+              "yaxis": 2
+            },
+            {
+              "alias": "Puts/s",
+              "yaxis": 2
+            }
+          ],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_database_leveldb_cacheblock{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "metric": "factomd_database_leveldb_cacheblock",
+              "refId": "A",
+              "step": 2
+            },
+            {
+              "expr": "{__name__=~\"factomd_database_overlay_gets_.*\", job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "{{__name__}}",
+              "metric": "factomd_database_overlay_gets_ablock",
+              "refId": "B",
+              "step": 2
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "LevelDB Specific",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Memory",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": true,
+      "height": 250,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 5,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "go_goroutines{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Go Routines",
+              "metric": "go_goroutines",
+              "refId": "A",
+              "step": 600
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Go Routines",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "height": "200px",
+          "id": 11,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "go_gc_duration_seconds_count{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Total Calls",
+              "metric": "go_gc_duration_seconds_count",
+              "refId": "A",
+              "step": 600
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Garbage Collection",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 12,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "go_gc_duration_seconds{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "{{quantile}}",
+              "metric": "go_gc_duration_seconds",
+              "refId": "A",
+              "step": 600
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Garbage Collection Duration (s)",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "s",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 14,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "go_memstats_gc_sys_bytes{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "GC_Bytes Used",
+              "refId": "A",
+              "step": 600
+            },
+            {
+              "expr": "go_memstats_next_gc_bytes{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Bytes when next GC",
+              "refId": "B",
+              "step": 600
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Garbage Collecter",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "bytes",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Process",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": true,
+      "height": 248,
+      "panels": [
+        {
+          "content": "# Network Connections",
+          "height": "100px",
+          "id": 13,
+          "links": [],
+          "mode": "markdown",
+          "span": 6,
+          "title": "Networking",
+          "type": "text"
+        },
+        {
+          "aliasColors": {
+            "Connection Count": "#629E51",
+            "Connections By Address": "#1F78C1",
+            "Metrics Count": "#F4D598"
+          },
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 9,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "Metrics Count",
+              "yaxis": 1
+            }
+          ],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_p2p_controller_connections_current{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Connection Count",
+              "metric": "factomd_p2p_controller_connections_current",
+              "refId": "A",
+              "step": 40
+            },
+            {
+              "expr": "factomd_p2p_controller_connectionsbyaddress_current{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Connections By Address",
+              "metric": "factomd_p2p_controller_connectionsbyaddress_current",
+              "refId": "C",
+              "step": 40
+            },
+            {
+              "expr": "factomd_p2p_controller_metrics_current{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Metrics Count",
+              "metric": "factomd_p2p_controller_metrics_current",
+              "refId": "B",
+              "step": 40
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Current Number of Connections",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 6,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_p2p_connection_process_receives_routine_guage{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "ProcessRecieves Routines",
+              "metric": "factomd_p2p_connection_process_receives_routine_guage",
+              "refId": "A",
+              "step": 40
+            },
+            {
+              "expr": "factomd_p2p_connection_process_sends_routine_guage{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "ProcessSends Routines",
+              "metric": "factomd_p2p_connection_process_sends_routine_guage",
+              "refId": "B",
+              "step": 40
+            },
+            {
+              "expr": "factomd_p2p_connection_runloop_routine_gauge{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Runloop Routines",
+              "metric": "factomd_p2p_connection__runloop_routine_gauge",
+              "refId": "C",
+              "step": 40
+            },
+            {
+              "expr": "factomd_p2p_connection_dialloop_routine_guage{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Dial Loop Routines",
+              "metric": "factomd_p2p_connection_dialloop_routine_guage",
+              "refId": "D",
+              "step": 40
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Connection Routines Alive",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "id": 8,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_p2p_connection_runloop_initialized_counter{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Initalized",
+              "metric": "factomd_p2p_connection_runloop_initialized_counter",
+              "refId": "A",
+              "step": 40
+            },
+            {
+              "expr": "factomd_p2p_connection_runloop_online_counter{job=\"factom-factomd-$Node\"}",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "Online",
+              "metric": "factomd_p2p_connection_runloop_online_counter",
+              "refId": "B",
+              "step": 40
+            },
+            {
+              "expr": "factomd_p2p_connection_runloop_offline_counter{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Offline",
+              "metric": "factomd_p2p_connection_runloop_offline_counter",
+              "refId": "C",
+              "step": 40
+            },
+            {
+              "expr": "factomd_p2p_connection_runloop_shutdown_counter{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Shutdown",
+              "metric": "factomd_p2p_connection_runloop_shutdown_counter",
+              "refId": "D",
+              "step": 40
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Connection Runloops",
+          "tooltip": {
+            "msResolution": false,
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Connections",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": true,
+      "height": 338,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 21,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "sort": "current",
+            "sortDesc": false,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_state_es_missing_entry_queue{job=\"factom-factomd-$Node\"}",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "missing entry queue",
+              "metric": "factom_es_asking_missing_entries",
+              "refId": "A",
+              "step": 60
+            },
+            {
+              "expr": "factomd_state_es_missing_entries{job=\"factom-factomd-$Node\"}",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "known missing ",
+              "metric": "factom_es_found_entries",
+              "refId": "B",
+              "step": 60
+            },
+            {
+              "expr": "factomd_state_es_found_entries{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Found of the missing",
+              "metric": "factom_es_missing_entries",
+              "refId": "C",
+              "step": 60
+            },
+            {
+              "expr": "factomd_state_es_asking_missing_entries{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Asking for missing",
+              "refId": "D",
+              "step": 60
+            },
+            {
+              "expr": "factomd_state_es_highest_asking_entries{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Highest dbht asking for entries",
+              "refId": "E",
+              "step": 60
+            },
+            {
+              "expr": "factomd_state_es_highest_missing_entries{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Highest dbhight of missing",
+              "refId": "F",
+              "step": 60
+            },
+            {
+              "expr": "factomd_state_es_first_missing_entries{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "First dbhight with missing",
+              "refId": "G",
+              "step": 60
+            },
+            {
+              "expr": "factomd_state_es_entry_dbheight_complete{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "dbhight complete",
+              "refId": "H",
+              "step": 60
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Missing Entry Syncing",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 24,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_state_es_average_requests{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Average Request per missing entry",
+              "refId": "A",
+              "step": 60
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Average Request per missing entry",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Missing Entries",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": true,
+      "height": 250,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "decimals": 3,
+          "fill": 1,
+          "id": 27,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {}
+          ],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_state_highest_saved",
+              "intervalFactor": 2,
+              "legendFormat": " {{job}} Highest Saved",
+              "metric": "factomd_state_highest_saved",
+              "refId": "A",
+              "step": 2
+            },
+            {
+              "expr": "factomd_state_highest_completed",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": " {{job}} Higest Complete",
+              "metric": "factomd_state_highest_completed",
+              "refId": "B",
+              "step": 2
+            },
+            {
+              "expr": "factomd_state_highest_ack",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": " {{job}} Highest Ack",
+              "metric": "factomd_state_highest_ack",
+              "refId": "C",
+              "step": 2
+            },
+            {
+              "expr": "hfactomd_state_highest_known",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": " {{job}} Highest Known",
+              "metric": "factomd_state_highest_known",
+              "refId": "D",
+              "step": 2
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Consensus",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Height",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": true,
+      "height": 250,
+      "panels": [
+        {
+          "content": "# InMsgQueue\nCurrent : Current messages in queue\n\nTotal : All messages that went through this queue",
+          "height": "75",
+          "id": 29,
+          "links": [],
+          "mode": "markdown",
+          "span": 3,
+          "title": "",
+          "type": "text"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "decimals": 0,
+          "fill": 1,
+          "id": 30,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "sort": null,
+            "sortDesc": null,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_state_queue_current_general_inmsg_vec{job=\"factom-factomd-$Node\"}",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "{{message}}",
+              "metric": "factomd_state_queue_current_insmg_ack",
+              "refId": "A",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_eom{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "EOM",
+              "refId": "B",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_audfault{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "AudFault",
+              "refId": "C",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_fedfault{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "FedFault",
+              "refId": "D",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_fullfault{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "FullFault",
+              "refId": "E",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_commitchain{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "CommitChain",
+              "refId": "F",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_commitentry{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "CommitEntry",
+              "refId": "G",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_dbsig{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "DBSig",
+              "refId": "H",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_eomtimeout{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "EOMTimeout",
+              "refId": "I",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_facttx{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "FactoidTx",
+              "refId": "J",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_heartbeat{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "Heartbeat",
+              "refId": "K",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_invaliddb{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "InvalidDB",
+              "refId": "L",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_mmsg{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "MissingMsg",
+              "refId": "M",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_mmsgresp{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "MissingMsgResp",
+              "refId": "N",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_missingdata{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "MissingData",
+              "refId": "O",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_missingdataresp{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "MissingDataResp",
+              "refId": "P",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_revealentry{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "RevealEntry",
+              "refId": "Q",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_reqblock{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "ReqBlock",
+              "refId": "T",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_dbstatemissing{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "DBStateMissing",
+              "refId": "U",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_dbstate{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "DBState",
+              "refId": "V",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_bounce{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "Bounce",
+              "refId": "W",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_bounceresp{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "BounceResp",
+              "refId": "X",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_misc{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "Misc",
+              "refId": "Y",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_current_inmsg_ack{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "Acks",
+              "refId": "R",
+              "step": 4
+            }
+          ],
+          "thresholds": [
+            {
+              "colorMode": "critical",
+              "fill": false,
+              "line": true,
+              "op": "gt",
+              "value": 8500
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Current InMsgQueue",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Current # InMsgQueue",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "decimals": 4,
+          "fill": 1,
+          "id": 31,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sideWidth": 300,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_state_queue_total_general_inmsg_vec{job=\"factom-factomd-$Node\"}",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "{{message}}",
+              "metric": "factomd_state_queue_current_general_inmsg_vec",
+              "refId": "A",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_eom{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "EOM",
+              "refId": "B",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_audfault{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "AudFault",
+              "refId": "C",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_fedfault{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "FedFault",
+              "refId": "D",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_fullfault{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "FullFault",
+              "refId": "E",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_commitchain{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "CommitChain",
+              "refId": "F",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_commitentry{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "CommitEntry",
+              "refId": "G",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_dbsig{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "DBSig",
+              "refId": "H",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_eomtimeout{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "EOMTimeout",
+              "refId": "I",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_facttx{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "FactoidTx",
+              "refId": "J",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_heartbeat{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "Heartbeat",
+              "refId": "K",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_invaliddb{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "InvalidDB",
+              "refId": "L",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_mmsg{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "MissingMsg",
+              "refId": "M",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_mmsgresp{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "MissingMsgResp",
+              "refId": "N",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_missingdata{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "MissingData",
+              "refId": "O",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_missingdataresp{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "MissingDataResp",
+              "refId": "P",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_revealentry{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "RevealEntry",
+              "refId": "Q",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_reqblock{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "ReqBlock",
+              "refId": "T",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_dbstatemissing{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "DBStateMissing",
+              "refId": "U",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_dbstate{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "DBState",
+              "refId": "V",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_bounce{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "Bounce",
+              "refId": "W",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_bounceresp{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "BounceResp",
+              "refId": "X",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_misc{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "Misc",
+              "refId": "Y",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_inmsg_ack{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "Acks",
+              "refId": "R",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Total InMsgQueue",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Total Through InMsgQueue",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "decimals": 3,
+          "fill": 1,
+          "id": 32,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sideWidth": 300,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_state_queue_total_general_netoutmsg_vec{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "{{message}}",
+              "metric": "factomd_state_queue_total_general_netoutmsg_vec",
+              "refId": "R",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_ack{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "Acks",
+              "metric": "factomd_state_queue_current_insmg_ack",
+              "refId": "A",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_eom{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "EOM",
+              "refId": "B",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_audfault{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "AudFault",
+              "refId": "C",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_fedfault{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "FedFault",
+              "refId": "D",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_fullfault{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "FullFault",
+              "refId": "E",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_commitchain{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "CommitChain",
+              "refId": "F",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_commitentry{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "CommitEntry",
+              "refId": "G",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_dbsig{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "DBSig",
+              "refId": "H",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_eomtimeout{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "EOMTimeout",
+              "refId": "I",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_facttx{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "FactoidTx",
+              "refId": "J",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_heartbeat{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "Heartbeat",
+              "refId": "K",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_invaliddb{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "InvalidDB",
+              "refId": "L",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_mmsg{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "MissingMsg",
+              "refId": "M",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_mmsgresp{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "MissingMsgResp",
+              "refId": "N",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_missingdata{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "MissingData",
+              "refId": "O",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_missingdataresp{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "MissingDataResp",
+              "refId": "P",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_revealentry{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "RevealEntry",
+              "refId": "Q",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_reqblock{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "ReqBlock",
+              "refId": "T",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_dbstatemissing{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "DBStateMissing",
+              "refId": "U",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_dbstate{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "DBState",
+              "refId": "V",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_bounce{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "Bounce",
+              "refId": "W",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_bounceresp{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "BounceResp",
+              "refId": "X",
+              "step": 4
+            },
+            {
+              "expr": "factomd_state_queue_total_netoutmsg_misc{job=\"factom-factomd-$Node\"}",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "Misc",
+              "refId": "Y",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Total NetworkOut",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Total Through NetworkOut",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": "",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 33,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_state_msg_replay_toss_total",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "{{job}}",
+              "metric": "factomd_state_msg_replay_toss_total",
+              "refId": "A",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Repeat Messages (tossed)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 34,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": null,
+            "sortDesc": null,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_state_broadcast_in_current",
+              "intervalFactor": 2,
+              "legendFormat": "{{job}}",
+              "metric": "factomd_state_broadcast_in_current",
+              "refId": "A",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "BroadCastInQueue",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 35,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "max",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_general_inmsg_vec\"}) by (job)",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "{{job}}",
+              "metric": "factomd_state_queue_current_general_inmsg_vec",
+              "refId": "A",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_general_inmsg_vec\", job=\"factom-factomd-m2prodfb\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodfb",
+              "refId": "B",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodfc\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodfc",
+              "refId": "C",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodfd\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodfd",
+              "refId": "D",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodfe\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodfe",
+              "refId": "E",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodff\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodff",
+              "refId": "F",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodfg\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodfg",
+              "refId": "G",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodfh\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodfh",
+              "refId": "H",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodfi\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodfi",
+              "refId": "I",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodaa\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodaa",
+              "refId": "J",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodab\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodab",
+              "refId": "K",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodac\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodac",
+              "refId": "L",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodad\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodad",
+              "refId": "M",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodae\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodae",
+              "refId": "N",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodaf\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodaf",
+              "refId": "O",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodag\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodag",
+              "refId": "P",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodah\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodah",
+              "refId": "Q",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodai\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodai",
+              "refId": "R",
+              "step": 4
+            },
+            {
+              "expr": "sum({__name__=~\"factomd_state_queue_current_inmsg_.*\", job=\"factom-factomd-m2prodfa\"})",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "m2prodfa",
+              "refId": "S",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "InMsgQueue Current Per Node",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "InMsgQueue Current",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {
+            "Arrival Instant": "#6D1F62",
+            "Arrival Moving": "#0A437C",
+            "Arrival Total": "#64B0C8",
+            "Backup": "#DEDAF7",
+            "Complete Instant": "#58140C",
+            "Complete Moving": "#BF1B00",
+            "Complete Total": "#E0752D"
+          },
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 37,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "sort": "max",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(rate(factomd_state_queue_total_general_inmsg_vec[1m])) by (job)",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "{{job}}",
+              "refId": "A",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "InMsgQueue Rates",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {
+            "Arrival Instant": "#6D1F62",
+            "Arrival Moving": "#0A437C",
+            "Arrival Total": "#64B0C8",
+            "Backup": "#DEDAF7",
+            "Complete Instant": "#58140C",
+            "Complete Moving": "#BF1B00",
+            "Complete Total": "#E0752D",
+            "Moving Arrival": "#0A437C",
+            "Moving Complete": "#629E51"
+          },
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 45,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "sort": null,
+            "sortDesc": null,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "Total NetOut Rate",
+              "stack": false
+            }
+          ],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(rate(factomd_state_queue_total_general_netoutmsg_vec[1m])) by (job)",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "Total NetOut Rate {{job}}",
+              "metric": "vec",
+              "refId": "H",
+              "step": 4
+            },
+            {
+              "expr": "rate(factomd_state_queue_total_general_netoutmsg_vec{job=\"factom-factomd-$Node\"}[1m])",
+              "format": "time_series",
+              "hide": true,
+              "intervalFactor": 2,
+              "legendFormat": "{{message}}",
+              "refId": "A",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "NetOutQueue Rates",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 36,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sort": "max",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_state_txrate_instant_tps",
+              "intervalFactor": 2,
+              "legendFormat": "InstantTXRate {{job}} ",
+              "metric": "factomd_state_txrate_instant_tps",
+              "refId": "A",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Instant Transaction Rate",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 43,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_state_txrate_total_tps",
+              "intervalFactor": 2,
+              "legendFormat": "TotalTXRate {{job}} ",
+              "metric": "factomd_state_txrate_total_tps",
+              "refId": "A",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Total Transaction Rate",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Queues",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": true,
+      "height": 250,
+      "panels": [
+        {
+          "content": "# API",
+          "height": "100",
+          "id": 38,
+          "links": [],
+          "mode": "markdown",
+          "span": 3,
+          "title": "API",
+          "type": "text"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 39,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "Total",
+              "stack": false
+            }
+          ],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_wsapi_v2_api_general_call_ns_count{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Total",
+              "refId": "A",
+              "step": 4
+            },
+            {
+              "expr": "{__name__=~\"factomd_wsapi_v2_api_call_.*._ns_count\", job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "{{__name__}}",
+              "refId": "B",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "API Call Counts",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "# of Calls",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 47,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "Total",
+              "stack": false
+            }
+          ],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_state_queue_current_general_api_vec{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "{{message}}",
+              "metric": "factomd_state_queue_current_general_inmsg_vec",
+              "refId": "A",
+              "step": 4
+            },
+            {
+              "expr": "sum(factomd_state_queue_current_general_api_vec{job=\"factom-factomd-$Node\"})",
+              "intervalFactor": 2,
+              "legendFormat": "Total",
+              "refId": "B",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Current API Queue",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 48,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "Total",
+              "stack": false
+            }
+          ],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_state_queue_total_general_api_vec{job=\"factom-factomd-$Node\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "{{message}}",
+              "metric": "factomd_state_queue_current_general_inmsg_vec",
+              "refId": "A",
+              "step": 4
+            },
+            {
+              "expr": "sum(factomd_state_queue_total_general_api_vec{job=\"factom-factomd-$Node\"})",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "Total",
+              "refId": "B",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Total API Queue",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 41,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "Total Rate",
+              "stack": false
+            }
+          ],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": true,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(rate(factomd_state_queue_total_general_api_vec{job=\"factom-factomd-$Node\"}[1m])) by (message)",
+              "intervalFactor": 2,
+              "legendFormat": "{{message}}",
+              "metric": "factomd_state_queue_total_general_api_vec",
+              "refId": "E",
+              "step": 4
+            },
+            {
+              "expr": "sum(rate(factomd_state_queue_total_general_api_vec{job=\"factom-factomd-$Node\"}[1m]))",
+              "intervalFactor": 2,
+              "legendFormat": "Total Rate",
+              "refId": "F",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "API Calls Per Second (15s samples)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "# Of API/s",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "${DS_PROMETHEUS}",
+          "fill": 1,
+          "id": 42,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "factomd_wsapi_v2_api_general_call_ns{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "{{quantile}}",
+              "refId": "A",
+              "step": 4
+            },
+            {
+              "expr": "factomd_wsapi_v2_api_general_call_ns_sum/factomd_wsapi_v2_api_general_call_ns_count{job=\"factom-factomd-$Node\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Average",
+              "refId": "B",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "API Handle Times (General)",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "ns",
+              "label": "Time for a call to complete",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "API",
+      "titleSize": "h6"
+    }
+  ],
+  "schemaVersion": 14,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "tags": [],
+          "text": "F0",
+          "value": "F0"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "Node",
+        "options": [
+          {
+            "selected": true,
+            "text": "F0",
+            "value": "F0"
+          }
+        ],
+        "query": "F0",
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "browser",
+  "title": "factomd-state",
+  "version": 2
+}
