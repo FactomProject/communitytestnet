@@ -110,7 +110,7 @@ Additional ports that your host can use and expose in whatever way you wish.
 
 This will take up 2 windows. First, you need to have an entry credit address with ECs in it. This will have to be provided for you. For demonstration, this EC address will be used:
 
-Sec : Es37BZSs7jUpyn3HosZa79kENWfvj1AVUdZioWykTTqqvA2MRi9h
+Sec : Es37BZSs7jUpyn3HosZa79kENWfvj1AVUdZioWykTTqqvA2MRi9h  
 Pub : EC2KnJQN86MYq4pQyeSGTHSiVdkhRCPXS3udzD4im6BXRBjZFMmR
 
 In the first window we will launch the wallet
@@ -122,9 +122,6 @@ Everything from here forward will be in the second window. We need to import the
 ```
 docker exec factomd_node factom-cli importaddress Es37BZSs7jUpyn3HosZa79kENWfvj1AVUdZioWykTTqqvA2MRi9h
 ```
-
-Fs1jQGc9GJjyWNroLPq7x6LbYQHveyjWNPXSqAvCEKpETNoTU5dP
-FA22de5NSG2FA2HmMaD4h8qSAZAJyztmmnwgLPghCQKoSekwYYct
 
 An identity needs to be brute forced, this program will brute force a valid identity and print out the relevent information you need to save. It will also provide you with a script to publish your identity to the blockchain.
 
