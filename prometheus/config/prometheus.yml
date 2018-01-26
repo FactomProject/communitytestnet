@@ -9,7 +9,7 @@ global:
         monitor: 'factomd'
 
 scrape_configs:
-    - job_name: factomd
+    - job_name: factom-factomd-F0
       static_configs:
           - targets:
               - 'factomd_node:9876'

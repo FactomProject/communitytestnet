@@ -75,7 +75,7 @@ services:
         build:
             context: prometheus/
         volumes:
-            - ./grafana/config/grafana.ini:/etc/grafana/grafana.ini:ro
+            - ./prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
         ports:
             - "9090:9090"
         command:
@@ -90,7 +90,8 @@ services:
         build:
             context: grafana/
         volumes:
-            - ./prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+            - ./grafana/config/grafana.ini:/etc/grafana/grafana.ini
+            - grafana_volume:/var/lib/grafana
         ports:
             - "3001:3000"
         command:
@@ -125,3 +126,4 @@ networks:
 
 volumes:
   factomd_volume:
+  grafana_volume:

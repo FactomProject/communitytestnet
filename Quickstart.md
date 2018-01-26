@@ -156,7 +156,9 @@ docker exec factomd_node bash /root/bin/stop.sh
 docker exec factomd_node bash /root/bin/start.sh
 ```
 
-### Identity Creation Quickstart
+### Identity Creation Recap
+
+Here is all the commands to create an identity recapped
 
 ```
 docker exec -it factomd_node factom-walletd
@@ -170,3 +172,30 @@ docker exec factomd_node  bash -c "sed -i '/Node Identity Information/q' /root/.
 docker exec factomd_node bash /root/bin/stop.sh
 docker exec factomd_node bash /root/bin/start.sh
 ```
+
+
+# Monitoring Tools
+
+Factomd comes with a few ways to monitor your node's health. The most obvious tool is the control panel found at localhost:8080. Information about the control panel can be found here https://docs.factom.com/#factoid-live.
+
+Factomd also comes with more monitoring tools that are included in this docker setup called Prometheus and Grafana. We will focus on Grafana, as this is the visualization tool that is most usful. To see Grafana, visit http://localhost:3001.
+
+## Setting up Grafana
+
+1. First ensure you have Grafana open by visiting http://localhost:3001
+2. The username is "admin" and password "admin". Be sure not to open this port to the world or anyone can log in!
+3. You will be greeted by a page that has a button saying "Add data source". Click that
+    - Name: `Prometheus`
+    - Type: `Prometheus`
+    - Ensure `Default` is checked
+    - URL: `http://prometheus:9090`
+4. Once all the fields are put in, click "Save and Test". You should be greeted by "Data source is working". If you encounter an error, here are some debug steps before asking for assistance.
+    - Ensure Prometheus is running `docker ps | grep prometheus`
+        - If there are no results, then you did not successfully run `docker-compose up -d`. Try running `docker-compose down` then `docker-compose up -d`
+5. Now we have Prometheus as a datasource, let's get some graphs up. In the top left is the Grafana logo, click it, then dashboard, then import
+    - Top Left > Dashboard > Import
+6. A preconfigured dashboard can be found here: https://grafana.com/dashboards/4482 
+	- Input `4482` into the first input, then click `Load`
+	- Make sure to select your prometheus source we added earlier from the dropdown menu next to `Prometheus`
+	- Click `import` and your dashboard is now viewable.
+7. Feel free to mess around and change things to your liking.
