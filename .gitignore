@@ -11,6 +11,8 @@ factom/bin/factom-walletd
 factom/bin/serveridentity
 factom/bin/signwithed25519
 
+notes.txt
+
 
 
 factomd.conf
