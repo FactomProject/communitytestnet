@@ -16,9 +16,9 @@ services:
             - "9876"
         ports:
             - "8110:8110"
-            # TODO: Change this to 8220
             - "8220:22"
             - "8090:8090"
+            - "8088:8088"
         volumes:
             - factomd_volume:/root/.factom/m2/
         networks:

@@ -235,3 +235,27 @@ Factomd also comes with more monitoring tools that are included in this docker s
 	- Make sure to select your prometheus source we added earlier from the dropdown menu next to `Prometheus`
 	- Click `import` and your dashboard is now viewable.
 7. Feel free to mess around and change things to your liking.
+
+
+# Removing volumes
+
+To totally remove everything from your system, you must remove the images, containers, and volumes
+
+First remove the containers
+```
+docker-compose down
+```
+
+Then remove the volumes
+
+```
+docker volume rm communitytestnet_factomd_volume
+docker volume rm communitytestnet_grafana_volume
+```
+
+You can also remove the images
+
+```
+docker image ls
+docker rmi IMAGE_ID                   
+```
