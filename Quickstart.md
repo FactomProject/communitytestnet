@@ -1,7 +1,7 @@
 | Index         |
 | ------------- |
 | [Prerequisites](#prerequisites)      |
-| [Running factomd](#running-factom)      |
+| [Running factomd](#running-factomd)      |
 | [Authority Nodes](#authority-nodes)      |
 | [Monitoring Tools](#monitoring-tools)      |
 
