@@ -8,22 +8,37 @@ services:
         depends_on:
             - nginx
         expose:
-            - "8088"
             - "22"
             - "8108" 
             - "8109" 
             - "8110" 
             - "9876"
+            - "8088"
         ports:
             - "8110:8110"
             - "8220:22"
             - "8090:8090"
             - "8088:8088"
         volumes:
-            - factomd_volume:/root/.factom/m2/
+            - factomd_volume:/root/.factom/
         networks:
             factomd:
                 ipv4_address: 10.7.0.1
+
+    enterprise-wallet:
+        container_name: enterprise-wallet
+        build:
+            context: enterprise-wallet/
+        expose:
+            - "8091"
+        ports:
+            - "8091:8091"
+        volumes:
+            - enterprise_volume:/root/.factom/
+        networks:
+            - factomd
+        depends_on:
+            - factomd_node
 
 
     elasticsearch:
@@ -127,3 +142,4 @@ networks:
 volumes:
   factomd_volume:
   grafana_volume:
+  enterprise_volume:
