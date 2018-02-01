@@ -165,7 +165,7 @@ MHash Seed (hex): 65323834386364376438393530623639613433646331333461663365313465
 ***********************************************************************
 ```
 
-You will want to copy down the Level 1 to 4 keys, the Entry credit address and the "Creating Identity/Keys" section. All this information will be needed to claim your identity in the future. The script that is created resides in the docker container called 'create.sh'. Let's change some permissions on it and execute it.
+You will want to copy down the Level 1 to 4 keys, the Entry credit address and the "Creating Identity/Keys" section. All this information will be needed to claim your identity in the future. The script that is created resides in the docker container called 'create.sh'. Let's change some permissions on it and execute it. (It should take 27 credits to fund this identity)
 
 ```
 docker exec factomd_node chmod 766 /root/create.sh
