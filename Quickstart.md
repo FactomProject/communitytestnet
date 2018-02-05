@@ -34,7 +34,7 @@ docker-compose up -d
 
 # Setup volume
 cp factomd.conf.EXAMPLE factomd.conf
-docker run --rm -v ${PWD}/factomd.conf:/source -v communitytestnet_factomd_volume:/destination busybox /bin/cp /source /destination/factomd.conf
+docker run --rm -v ${PWD}/factomd.conf:/source -v communitytestnet_factomd_volume:/destination busybox /bin/cp /source /destination/m2/factomd.conf
 
 # Start factomd
 docker exec factomd_node bash /root/bin/start.sh
