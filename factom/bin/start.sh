@@ -1,1 +1,1 @@
-nohup /root/bin/factomd -network=CUSTOM -customnet=fct_community_test -blktime=60 -sim_stdin=false > runlog.txt 2>&1 &
+nohup /root/bin/factomd -network=CUSTOM -customnet=fct_community_test -blktime=60 -debugconsole=remotehost:8093 > runlog.txt 2>&1 &

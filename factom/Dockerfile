@@ -3,7 +3,7 @@ FROM emyrk/ubuntu-golang:1.9.2
 
 # Get git, ssh, and other tools
 RUN apt-get update \
-    && apt-get -y install openssh-server curl git vim iputils-ping net-tools netcat ufw\
+    && apt-get -y install openssh-server curl git vim iputils-ping net-tools netcat ufw sudo telnet\
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Setup ssh
@@ -58,5 +58,5 @@ RUN mkdir -p /root/.factom/m2
 WORKDIR /root/
 
 ## Expose and start
-EXPOSE 22 8108 8109 8110 8088 8090 9876
+EXPOSE 22 8108 8109 8110 8088 8090 9876 8093
 CMD ["/usr/sbin/sshd", "-D"]

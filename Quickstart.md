@@ -29,7 +29,7 @@ git clone https://github.com/FactomProject/communitytestnet.git
 cd communitytestnet
 
 # Start docker containers
-docker pull emyrk/factomd_testnet_community:v1
+docker pull emyrk/factomd_testnet_community:latest
 docker-compose up -d
 
 # Setup volume

@@ -62,7 +62,7 @@ network = CUSTOM
 CustomBootstrapIdentity               = 8888882f5002ff95fce15d20ecb7e18ae6cc4d5849b372985d856b56e492ae0f
 CustomBootstrapKey                    = 58cfccaa48a101742845df3cecde6a9f38037030842d34d0eaa76867904705ae
 ExchangeRateAuthorityPublicKey        = 58cfccaa48a101742845df3cecde6a9f38037030842d34d0eaa76867904705ae
-DirectoryBlockInSeconds               = 60
+DirectoryBlockInSeconds               = 600
 
 
 ; --- Node Identity Information (Keep this line please) ---
