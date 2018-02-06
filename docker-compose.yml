@@ -4,7 +4,7 @@ services:
     factomd_node:
         container_name: factomd_node
         # build: factom/
-        image: emyrk/factomd_testnet_community:v1
+        image: emyrk/factomd_testnet_community:latest
         depends_on:
             - nginx
         expose:
