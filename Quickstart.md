@@ -220,7 +220,7 @@ docker exec factomd_node bash /root/bin/start.sh
 
 # Monitoring Tools
 
-Factomd comes with a few ways to monitor your node's health. The most obvious tool is the control panel found at localhost:8080. Information about the control panel can be found here https://docs.factom.com/#factoid-live.
+Factomd comes with a few ways to monitor your node's health. The most obvious tool is the control panel found at localhost:8090. Information about the control panel can be found here https://docs.factom.com/#factoid-live.
 
 Factomd also comes with more monitoring tools that are included in this docker setup called Prometheus and Grafana. We will focus on Grafana, as this is the visualization tool that is most usful. To see Grafana, visit http://localhost:3001.
 
