@@ -180,7 +180,7 @@ docker exec factomd_node chmod 766 /root/create.sh
 docker exec factomd_node bash /root/create.sh
 ```
 
-Now your identity is in the blockchain, to verify we can grab your root chain information: (To the human eye it's mostly gibberish)
+Now your identity is in the blockchain, to verify we can grab your root chain information after factomd has fully synced, check the control panel to confirm: (To the human eye it's mostly gibberish)
 
 ```
 # Replace the ChainID with your root chain id seen above
