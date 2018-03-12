@@ -1,5 +1,3 @@
-factom/publish.sh
-factom/build.sh
 factom/run.sh
 factom/loadbin.sh
 factom/ssh.sh

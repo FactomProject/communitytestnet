@@ -1,0 +1,2 @@
+docker tag factomd_testnet_community emyrk/factomd_testnet_community:latest
+docker push emyrk/factomd_testnet_community:latest

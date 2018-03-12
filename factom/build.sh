@@ -1,0 +1,1 @@
+docker build -t factomd_testnet_community .
