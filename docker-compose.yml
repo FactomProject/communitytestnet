@@ -91,6 +91,7 @@ services:
             context: prometheus/
         volumes:
             - ./prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+            - prometheus_volume:/prometheus
         ports:
             - "9090:9090"
         command:
@@ -143,3 +144,4 @@ volumes:
   factomd_volume:
   grafana_volume:
   enterprise_volume:
+  prometheus_volume:
