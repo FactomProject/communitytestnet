@@ -68,15 +68,22 @@ At the block height `ChangeAcksHeight` you should see both nodes change identiti
 ## Detailed instructions for some of the above aspects
 
 __Check if the DBHeight matches that of the network__
--- This is done by comparing DBHeight in your control panel (localhost:8090) with --STEVEN INSERT INFO--
+-- This is done by comparing DBHeight in your control panel (localhost:8090) with the dbheight of your federated server.
 
 __Check if the minutes are following that of the network__
--- This is done by comparing the -- FOR THE LOVE OF ALL THATS HOLY; INSERT SOME INSTRUCTIONS OR EVEN A IMGUR-LINK TO SHOW HOW THIS IS DONE STEVEN(!)
+-- This is done by comparing the control panel of the Stanby node to that of the Federated. On the summary tab of the `More Detailed Node Information` you will see this:
+
+```
+===SummaryStart===
+   FNode04[f0b7e3] L___vm01  0/ 0  0.0%  0.000   165[e0b9f8] 163/166/167  7/ 7         0/0/0/0                43400/0/0/0      0     0     2/40/100           0/0/0   0.07/0.00 0/0 - 309415
+```
+
+The `7/7` means you are on minute 7. You will want to make sure this number is the same on the Standby (`_/7`) and the Federated (`7/7`)
 
 __Check the process list for `<nil>`, that indicates some network instability__
 -- Process list is located in the control panel (localhost:8090) -> "more detailed node information". If any entries show <nil> you should not move on with the brainswap.
   
-__Modify config file__ (for people not familiar with editing text files in the terminal)
+__Modify config file__ (for people not familiar with editing text files in the terminal, you can use nano)
 Move to the folder where factomd.conf is located
 ```sudo apt update```
 ```sudo apt install nano```
