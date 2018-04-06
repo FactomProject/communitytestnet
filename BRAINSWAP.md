@@ -83,13 +83,30 @@ The `7/7` means you are on minute 7. You will want to make sure this number is t
 __Check the process list for `<nil>`, that indicates some network instability__
 -- Process list is located in the control panel (localhost:8090) -> "more detailed node information". If any entries show <nil> you should not move on with the brainswap.
   
-__Modify config file__ (for people not familiar with editing text files in the terminal, you can use nano)
-Move to the folder where factomd.conf is located
-```sudo apt update```
-```sudo apt install nano```
-```nano factomd.conf```
-Edit the files per the instructions above.
-Save the file: ```ctrl+O```
+__Modify config file__ -- You must edit the config file in the docker container. First get into a shell inside the container:
+
+
+```
+docker exec -it factomd_node bash
+```
+
+__If you want to use vim__
+```
+vi /root/.factom/m2/factomd.conf
+```
+
+Edit the files per the instructions above.  
+Save & exit
+
+__If you want to use nano__
+```
+Apt update
+Apt install nano
+nano /root/.factom/m2/factomd.conf
+```
+
+Edit the files per the instructions above.  
+Save the file: ```ctrl+O```  
 Exit nano: ```ctrl+x```
   
   
