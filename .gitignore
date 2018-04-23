@@ -9,7 +9,7 @@ factom/bin/factom-cli
 factom/bin/factom-walletd
 factom/bin/serveridentity
 factom/bin/signwithed25519
-
+STARTNET.md
 notes.txt
 
 
