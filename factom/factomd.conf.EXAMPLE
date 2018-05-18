@@ -28,8 +28,11 @@ ControlPanelPort                      = 8090
 ;TestSpecialPeers     = ""
 LocalNetworkPort     = 8110
 ; Using the seeds url for the community testnet
-LocalSeedURL         = "https://raw.githubusercontent.com/FactomProject/communitytestnet/master/seeds/testnetseeds.txt"
-LocalSpecialPeers    = ""
+;LocalSeedURL         = "https://raw.githubusercontent.com/FactomProject/communitytestnet/master/seeds/testnetseeds.txt"
+;LocalSpecialPeers    = ""
+CustomNetworkPort     = 8110
+CustomSeedURL         = "https://raw.githubusercontent.com/FactomProject/communitytestnet/master/seeds/testnetseeds.txt"
+CustomSpecialPeers    = ""
 ; --------------- NodeMode: FULL | SERVER ----------------
 ;NodeMode                                = FULL
 ;ExchangeRateChainId                     = 111111118d918a8be684e0dac725493a75862ef96d2d3f43f84b26969329bf03
@@ -52,6 +55,15 @@ LocalSpecialPeers    = ""
 
 ; Specifying when to change ACKs for switching leader servers
 ;ChangeAcksHeight                      = 0
+
+
+; Community Testnet Bootstrap information
+network = CUSTOM
+CustomBootstrapIdentity               = 8888882f5002ff95fce15d20ecb7e18ae6cc4d5849b372985d856b56e492ae0f
+CustomBootstrapKey                    = 58cfccaa48a101742845df3cecde6a9f38037030842d34d0eaa76867904705ae
+ExchangeRateAuthorityPublicKey        = 58cfccaa48a101742845df3cecde6a9f38037030842d34d0eaa76867904705ae
+DirectoryBlockInSeconds               = 600
+
 
 ; --- Node Identity Information (Keep this line please) ---
 IdentityChainID						 	 = FA1E000000000000000000000000000000000000000000000000000000000000
